@@ -8,7 +8,8 @@ public class JdbcConnector {
 
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(url, userName, password);
+            Connection connection = DriverManager.getConnection(url, userName, password);
+            return connection;
         } catch (SQLException e) {
             e.printStackTrace();
         }

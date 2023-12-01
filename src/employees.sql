@@ -1,6 +1,6 @@
 drop database if exists employees;
 create database employees;
-
+use employees;
 drop table if exists city;
 create table city (
 	id int not null auto_increment,
@@ -11,9 +11,9 @@ create table city (
 drop table if exists employees;
 create table employees (
 	id int auto_increment not null,
-    name varchar(50),
-    salary int,
-    city_id int,
+    name varchar(50) not null,
+    salary int not null,
+    city_id int not null,
     manager_id int,
     primary key (id),
     foreign key (city_id) references city(id),
@@ -84,10 +84,11 @@ begin
 end //
 delimiter ;
 select * from employees where id = 2;
-
+truncate employees;
+delete from city;
 
 -- join
-select e.id, e.name, e.salary, c.name as city, e2.name as manager from employees e
+select e.*, c.name as city, e2.name as manager from employees e
 left join city c on e.city_id = c.id
 left join employees e2 on e.manager_id = e2.id;
 
